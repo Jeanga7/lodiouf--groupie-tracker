@@ -7,37 +7,33 @@ import (
 )
 
 func HandleError(err error) {
-	panic(err)
+	if err != nil {
+		panic(err)
+	}
 }
 
 type Artist struct {
-	id           int      `json:"id"`
-	image        string   `json:"image"`
-	name         string   `json:"name"`
-	members      []string `json:"members"`
-	creationDate int      `json:"creationDate"`
-	firstAlbum   string   `json:"firstAlbum"`
-	locations    string   `json:"locations"`
-	concertDates string   `json:"concertDates"`
-	relations    string   `json:"relations"`
+	Id           int      `json:"id"`
+	Image        string   `json:"image"`
+	Name         string   `json:"name"`
+	Members      []string `json:"members"`
+	CreationDate int      `json:"creationDate"`
+	FirstAlbum   string   `json:"firstAlbum"`
+	Locations    string   `json:"locations"`
+	ConcertDates string   `json:"concertDates"`
+	Relations    string   `json:"relations"`
 }
 
 func ReadAPI() []Artist {
 	r, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
-	if err != nil {
-		HandleError(err)
-	}
+	HandleError(err)
 
 	data, err1 := io.ReadAll(r.Body)
-	if err1 != nil {
-		HandleError(err1)
-	}
+	HandleError(err1)
 
-	allArtists := []Artist{}
+	var allArtists []Artist
 
-	err = json.Unmarshal(data, &allArtists)
-	if err != nil {
-		HandleError(err)
-	}
+	json.Unmarshal(data, &allArtists)
+
 	return allArtists
 }
