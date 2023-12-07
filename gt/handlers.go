@@ -24,7 +24,7 @@ type Artist struct {
 	Relations    string   `json:"relations"`
 }
 
-func ReadAPI(url string, allArtists *interface{}) {
+func ReadAPI(url string, allArtists interface{}) {
 	r, err := http.Get(url)
 	HandleError(err)
 
