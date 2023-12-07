@@ -24,16 +24,12 @@ type Artist struct {
 	Relations    string   `json:"relations"`
 }
 
-func ReadAPI() []Artist {
-	r, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+func ReadAPI(url string, allArtists *interface{}) {
+	r, err := http.Get(url)
 	HandleError(err)
 
 	data, err1 := io.ReadAll(r.Body)
 	HandleError(err1)
 
-	var allArtists []Artist
-
 	json.Unmarshal(data, &allArtists)
-
-	return allArtists
 }

@@ -6,5 +6,8 @@ import (
 )
 
 func main() {
-	fmt.Println(gt.ReadAPI())
+	url := "https://groupietrackers.herokuapp.com/api/"
+	allArtists := &[]gt.Artist{}
+	gt.ReadAPI(url+"artists", allArtists)
+	fmt.Println()
 }
