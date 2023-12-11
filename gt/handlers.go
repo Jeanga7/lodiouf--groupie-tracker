@@ -12,6 +12,8 @@ func HandleError(err error) {
 	}
 }
 
+var BaseURL = "https://groupietrackers.herokuapp.com/api/"
+
 type Artist struct {
 	Id           int      `json:"id"`
 	Image        string   `json:"image"`
@@ -32,4 +34,10 @@ func ReadAPI(url string, allArtists interface{}) {
 	HandleError(err1)
 
 	json.Unmarshal(data, &allArtists)
+}
+
+func FetchArtists() []Artist {
+	allArtists := []Artist{}
+	ReadAPI(BaseURL+"artists", &allArtists)
+	return allArtists
 }
