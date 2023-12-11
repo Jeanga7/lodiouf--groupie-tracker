@@ -13,17 +13,27 @@ type Artist struct {
 }
 
 type Location struct {
-	Id        int      `json:"id"`
-	Locations []string `json:"locations"`
-	Dates     string   `json:"dates"`
+	Index []struct {
+		Id        int      `json:"id"`
+		Locations []string `json:"locations"`
+		Dates     string   `json:"dates"`
+	} `json:"index"`
 }
 
 type Date struct {
-	Id    int      `json:"id"`
-	Dates []string `json:"dates"`
+	Index []struct {
+		Id    int      `json:"id"`
+		Dates []string `json:"dates"`
+	} `json:"index"`
 }
 
 type Relation struct {
-	Id             int                 `json:"id"`
-	DatesLocations map[string][]string `json:"datesLocations"`
+	Index []struct {
+		Id             int                 `json:"id"`
+		DatesLocations map[string][]string `json:"datesLocations"`
+	} `json:"index"`
+}
+
+type Index struct {
+	Content string `json:"index"`
 }

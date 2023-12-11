@@ -6,5 +6,5 @@ import (
 )
 
 func main() {
-	fmt.Println(gt.FetchArtists())
+	fmt.Println(gt.FetchRelations().Index)
 }

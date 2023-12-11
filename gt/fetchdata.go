@@ -6,20 +6,20 @@ func FetchArtists() []Artist {
 	return allArtists
 }
 
-func FetchLocations() []Location {
-	allLocations := []Location{}
+func FetchLocations() Location {
+	allLocations := Location{}
 	ReadAPI(BaseURL+"locations", &allLocations)
 	return allLocations
 }
 
-func FetchDates() []Date {
-	allDates := []Date{}
+func FetchDates() Date {
+	allDates := Date{}
 	ReadAPI(BaseURL+"dates", &allDates)
 	return allDates
 }
 
-func FetchRelations() []Relation {
-	allRelations := []Relation{}
-	ReadAPI(BaseURL+"relations", &allRelations)
+func FetchRelations() Relation {
+	allRelations := Relation{}
+	ReadAPI(BaseURL+"relation", &allRelations)
 	return allRelations
 }
