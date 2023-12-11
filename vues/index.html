@@ -38,11 +38,36 @@
             background-color: white;
             display: flex;
             flex-direction: column;
-            width: 192px;
-            height: 230.4px;
+            width: 180px;
+            height: 210px;
             flex-shrink: 0;
             border-radius: 12px;
             box-shadow: 0 0 5px rgb(194, 194, 194);
+            padding: 18px 0 18px 18px;
+            justify-content: space-between;
+        }
+        .artist-image {
+            border: 1px solid rgb(131, 131, 131);
+            border-radius: 50%;
+            width: 60%;
+            height: auto;
+        }
+        .artist-name {
+            color: #000;
+            font-family: 'Poppins';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        .artist-top-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .artist-year {
+            font-family: 'Poppins';
         }
     </style>
 </head>
@@ -51,7 +76,15 @@
         <h1>Groupie Tracker</h1>
     </div>
     <div id="artists-list">
-        <div class="artist-card"></div>
+        <div class="artist-card">
+            <div class="artist-top-box">
+                <img src="https://groupietrackers.herokuapp.com/api/images/queen.jpeg" alt="Queen" class="artist-image">
+                <span class="artist-name">Artiste Name</span>
+            </div>
+            <div class="artist-bottom-box">
+                <span class="artist-year">1970</span>
+            </div>
+        </div>
     </div>
 </body>
 </html>
