@@ -14,18 +14,12 @@ func HandleError(err error) {
 
 var BaseURL = "https://groupietrackers.herokuapp.com/api/"
 
-func ReadAPI(url string, allArtists interface{}) {
+func ReadAPI(url string, allDatas interface{}) {
 	r, err := http.Get(url)
 	HandleError(err)
 
 	data, err1 := io.ReadAll(r.Body)
 	HandleError(err1)
 
-	json.Unmarshal(data, &allArtists)
-}
-
-func FetchArtists() []Artist {
-	allArtists := []Artist{}
-	ReadAPI(BaseURL+"artists", &allArtists)
-	return allArtists
+	json.Unmarshal(data, &allDatas)
 }
