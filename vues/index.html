@@ -4,8 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            background-color: #EEE;
+            display: grid;
+            grid-template-rows: clamp(4em, 25vh, 8em) auto;
+            margin: 0;
+            row-gap: clamp(12px, 5vh, 38px);
+        }
+        #page-title {
+            background-color: white;
+            display: flex;
+            box-shadow: 0 2px 8px #acacac;
+        }
+        #page-title h1 {
+            margin: auto;
+            font-size: clamp(1.8em, 12vh, 4em);
+            color: black;
+            font-family: 'Noto Serif Display', serif;
+            /* text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.95); */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        #artists-list {
+            padding: 0 20px 20px 20px;
+        }
+
+        .artist-card {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            width: 192px;
+            height: 230.4px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            box-shadow: 0 0 5px rgb(194, 194, 194);
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="page-title">
+        <h1>Groupie Tracker</h1>
+    </div>
+    <div id="artists-list">
+        <div class="artist-card"></div>
+    </div>
 </body>
 </html>
