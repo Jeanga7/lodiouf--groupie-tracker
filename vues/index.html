@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/img/g-favicon.png">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <div id="page-title">
         <h1>Groupie Tracker</h1>
     </div>
     <div id="artists-list">
+        {{ range .Artists }}
         <div class="artist-card">
             <div class="artist-top-box">
-                <img src="https://groupietrackers.herokuapp.com/api/images/queen.jpeg" alt="Queen" class="artist-image">
-                <span class="artist-name">Artiste Name</span>
+                <img src="{{ .Image }}" alt="Queen" class="artist-image">
+                <span class="artist-name">{{ .Name }}</span>
             </div>
             <div class="artist-bottom-box">
-                <span class="artist-year">1970</span>
+                <span class="artist-year">{{ .CreationDate }}</span>
                 <span class="voir-zone">
                     <span class="voir-button">VOIR</span>
                     <span class="green-arrow">
@@ -31,6 +33,7 @@
                 </span>
             </div>
         </div>
+        {{ end }}
     </div>
 </body>
 </html>

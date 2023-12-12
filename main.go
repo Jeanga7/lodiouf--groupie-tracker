@@ -3,8 +3,22 @@ package main
 import (
 	"fmt"
 	"gt/gt"
+	"log"
+	"net/http"
 )
 
 func main() {
-	fmt.Println(gt.FetchArtists()[0].Image)
+	port := ":8081"
+	http.HandleFunc("/", gt.HandlePage)
+
+	// Create MUX Routing
+	fs := http.FileServer(http.Dir("./vues/assets/"))
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
+
+	fmt.Println("Server Online...")
+	fmt.Println("Access to the app using this link : http://localhost" + port)
+
+	if err := http.ListenAndServe(port, nil); err != nil {
+		log.Fatal(err)
+	}
 }

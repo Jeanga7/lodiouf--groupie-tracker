@@ -45,6 +45,9 @@
         }
         #artists-list {
             padding: 0 20px 20px 20px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            row-gap: 2em;
         }
 
         .artist-card {
