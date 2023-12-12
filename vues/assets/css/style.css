@@ -1,16 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+:root{
+    --primary-color: black;
+    --card-width: 12vw;
+    --card-height: 190px;
+}
         body {
             background-color: #EEE;
             display: grid;
             grid-template-rows: clamp(4em, 25vh, 8em) auto;
             margin: 0;
+            padding: 0;
             row-gap: clamp(12px, 5vh, 38px);
         }
 
         /* SVG Arrow */
         .st0{
-            fill:#00C838;
+            fill:var(--primary-color);
             -webkit-transition: all 500ms;
             -moz-transition: all 500ms;
             -o-transition: all 500ms;
@@ -44,18 +50,27 @@
             text-transform: uppercase;
         }
         #artists-list {
-            padding: 0 20px 20px 20px;
+            padding: 0 1vw 1vw 1vw;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            row-gap: 1.5em;
+            justify-content: space-evenly;
+            justify-items: center;
+            row-gap: 2vw;
+
+
+
+            /* justify-content: space-between;
+            width: 96.8vw;
+            flex-flow: row wrap;
+            gap: 1.5vw 1vw; */
         }
 
         .artist-card {
             background-color: white;
             display: flex;
             flex-direction: column;
-            width: 150px;
-            height: 190px;
+            width: var(--card-width);
+            height: var(--card-height);
             flex-shrink: 0;
             border-radius: 12px;
             box-shadow: 0 0 5px rgb(194, 194, 194);
@@ -100,7 +115,7 @@
             display: flex;
             height: 30px;
             width: 30px;
-            background-color: #00C838;
+            background-color: var(--primary-color);
             border-radius: 50%;
         }
         
@@ -110,7 +125,7 @@
         }
 
         .voir-button {
-            background-color: #00C838;
+            background-color: var(--primary-color);
             color: white;
             font-family: 'Poppins';
             font-weight: 700;
@@ -134,7 +149,7 @@
             box-shadow: 0 0 14px rgb(165, 165, 165);
         }
         .artist-card:hover .st0{fill:#FFFFFF;}
-        .artist-card:hover .st1{fill-rule:evenodd;clip-rule:evenodd;fill:#00C838;}
+        .artist-card:hover .st1{fill-rule:evenodd;clip-rule:evenodd;fill:var(--primary-color);}
         .artist-card:hover .voir-button{
             width: 100%;
             padding: 2px 32px 2px 8px;
