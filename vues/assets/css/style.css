@@ -55,18 +55,12 @@
             grid-template-columns: repeat(6, 1fr);
             justify-content: space-evenly;
             justify-items: center;
-            row-gap: 2vw;
-
-
-
-            /* justify-content: space-between;
-            width: 96.8vw;
-            flex-flow: row wrap;
-            gap: 1.5vw 1vw; */
+            row-gap: 1.5vw;
         }
 
         .artist-card {
             background-color: white;
+            color: #000;
             display: flex;
             flex-direction: column;
             width: var(--card-width);
@@ -90,7 +84,6 @@
             height: auto;
         }
         .artist-name {
-            color: #000;
             font-family: 'Poppins';
             font-size: 0.85em;
             font-style: normal;
@@ -147,12 +140,16 @@
         /* Hover effects */
         .artist-card:hover {
             box-shadow: 0 0 14px rgb(165, 165, 165);
+            background-color: black;
+            color: white;
         }
         .artist-card:hover .st0{fill:#FFFFFF;}
         .artist-card:hover .st1{fill-rule:evenodd;clip-rule:evenodd;fill:var(--primary-color);}
         .artist-card:hover .voir-button{
             width: 100%;
             padding: 2px 32px 2px 8px;
+            background-color: white;
+            color: black;
         }
 
         /* -------------------- */
