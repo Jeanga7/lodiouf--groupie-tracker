@@ -55,7 +55,7 @@
             grid-template-columns: repeat(6, 1fr);
             justify-content: space-evenly;
             justify-items: center;
-            row-gap: 1.5vw;
+            row-gap: 1.5em;
         }
 
         .artist-card {
@@ -191,7 +191,7 @@
             }
         }
 
-        @media only screen and (min-width: 800px) {
+        @media only screen and (min-width: 900px) {
             #artists-list {
                 grid-template-columns: repeat(6, 1fr);
             }
