@@ -2,7 +2,7 @@
 
 :root{
     --primary-color: black;
-    --card-width: 12vw;
+    --card-width: clamp(150px, 12vw, 200px);
     --card-height: 190px;
 }
         body {
@@ -153,3 +153,49 @@
         }
 
         /* -------------------- */
+
+        /* Responsivité */
+        @media only screen and (max-width: 600px) {
+            #artists-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .artist-card {
+                width: clamp(80px, 35vw, 250px);
+            }
+        }
+
+        @media only screen and (min-width: 600px) {
+            #artists-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .artist-card {
+                width: clamp(70px, 28vw, 150px);
+            }
+        }
+
+        @media only screen and (min-width: 700px) {
+            #artists-list {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .artist-card {
+                width: clamp(120px, 18vw, 200px);
+            }
+        }
+
+        @media only screen and (min-width: 800px) {
+            #artists-list {
+                grid-template-columns: repeat(5, 1fr);
+            }
+            .artist-card {
+                width: clamp(100px, 14vw, 200px);
+            }
+        }
+
+        @media only screen and (min-width: 800px) {
+            #artists-list {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            .artist-card {
+                width: clamp(100px, 12vw, 200px);
+            }
+        }
