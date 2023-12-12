@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            background-color: #EEE;
+            display: grid;
+            grid-template-rows: clamp(4em, 25vh, 8em) auto;
+            margin: 0;
+            row-gap: clamp(12px, 5vh, 38px);
+        }
+
+        /* SVG Arrow */
+        .st0{
+            fill:#00C838;
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            -o-transition: all 500ms;
+            transition: all 500ms;
+        }
+	    .st1{
+            fill-rule:evenodd;
+            clip-rule:evenodd;
+            fill:#FFFFFF;
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            -o-transition: all 500ms;
+            transition: all 500ms;
+        }
+        /*---------------------*/
+
+        #page-title {
+            background-color: white;
+            display: flex;
+            box-shadow: 0 2px 8px #acacac;
+        }
+        #page-title h1 {
+            margin: auto;
+            font-size: clamp(1em, 5vw, 4em);
+            color: black;
+            font-family: 'Noto Serif Display', serif;
+            /* text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.95); */
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        #artists-list {
+            padding: 0 20px 20px 20px;
+        }
+
+        .artist-card {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            height: 190px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            box-shadow: 0 0 5px rgb(194, 194, 194);
+            padding: 18px;
+            justify-content: space-between;
+            cursor: pointer;
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            -o-transition: all 500ms;
+            transition: all 500ms;
+        }
+        
+        .artist-image {
+            border: 1px solid rgb(131, 131, 131);
+            border-radius: 50%;
+            width: 60%;
+            height: auto;
+        }
+        .artist-name {
+            color: #000;
+            font-family: 'Poppins';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        .artist-top-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .artist-bottom-box {
+            display: flex;
+            justify-content: space-between;
+        }
+        .artist-year {
+            font-family: 'Poppins';
+        }
+
+        .green-arrow {
+            display: flex;
+            height: 30px;
+            width: 30px;
+            background-color: #00C838;
+            border-radius: 50%;
+        }
+        
+        .voir-zone {
+            display: flex;
+            justify-content:end;
+        }
+
+        .voir-button {
+            background-color: #00C838;
+            color: white;
+            font-family: 'Poppins';
+            font-weight: 700;
+            border-radius: 15px;
+            height: 26px;
+            padding: 2px 22px 2px 8px;
+            margin-right: -30px;
+            display: inline;
+            width: 0px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: clip;
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -o-transition: all 1s;
+            transition: all 1s;
+        }
+
+        /* Hover effects */
+        .artist-card:hover {
+            box-shadow: 0 0 14px rgb(165, 165, 165);
+        }
+        .artist-card:hover .st0{fill:#FFFFFF;}
+        .artist-card:hover .st1{fill-rule:evenodd;clip-rule:evenodd;fill:#00C838;}
+        .artist-card:hover .voir-button{
+            width: 100%;
+            padding: 2px 32px 2px 8px;
+        }
+
+        /* -------------------- */
