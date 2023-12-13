@@ -34,9 +34,9 @@
         /*---------------------*/
 
         #page-title {
-            background-color: white;
+            /* background-color: white; */
             display: flex;
-            box-shadow: 0 2px 8px #acacac;
+            /* box-shadow: 0 2px 8px #acacac; */
         }
         #page-title h1 {
             margin: auto;
