@@ -1,62 +1,35 @@
 package gt
 
-func FetchArtists() []Artist {
-	allArtists := []Artist{}
-	ReadAPI(BaseURL+"artists", &allArtists)
-	return allArtists
-}
+import "sync"
 
-func FetchLocations() Location {
-	allLocations := Location{}
-	ReadAPI(BaseURL+"locations", &allLocations)
-	return allLocations
-}
-
-func FetchDates() Date {
-	allDates := Date{}
-	ReadAPI(BaseURL+"dates", &allDates)
-	return allDates
-}
-
-func FetchRelations() Relation {
-	allRelations := Relation{}
-	ReadAPI(BaseURL+"relation", &allRelations)
-	return allRelations
-}
-/* 
-//__________________________________________________________________________________
-var url = "https://groupietrackers.herokuapp.com/api"
-var cache models.Cache
-
-func Fetch(url string, pointer interface{}) error {
-	res, err := http.Get(url)
-	if err != nil {
-		return err
-	}
-	defer res.Body.Close()
-	responseData, err := io.ReadAll(res.Body)
-	if err != nil {
-		return err
-	}
-	err = json.Unmarshal(responseData, &pointer)
-	if err != nil {
-		return err
-	}
-	return nil
+var endpoints = map[string]interface{}{
+	"artists":   &[]Artist{},
+	"locations": &Location{},
+	"dates":     &Date{},
+	"relation":  &Relation{},
 }
 
 func Parse() {
 	var wg sync.WaitGroup
+	ch := make(chan string)
 
-	Fetch(url, &cache)
-	wg.Add(1)
+	for endpoint, data := range endpoints {
+		wg.Add(1)
+		go func(endpoint string, data interface{}) {
+			defer wg.Done()
+			ReadAPI(BaseURL+endpoint, data)
+			ch <- endpoint
+		}(endpoint, data)
+	}
+
+	// Attend que toutes les goroutines soient terminées
 	go func() {
-		go Fetch(cache.ArtistsURL, &cache.Artists)
-		// go Fetch(cache.LocationsURL, &cache.Locations)
-		// go Fetch(cache.DatesURL, &cache.Dates)
-		// go Fetch(cache.RelationURL, &cache.Relation)
-		wg.Done()
+		wg.Wait()
+		close(ch)
 	}()
-	wg.Wait()
+
+	// Utilisez le canal pour synchroniser la fin de l'exécution de toutes les goroutines
+	for range endpoints {
+		<-ch
+	}
 }
- */
