@@ -55,7 +55,7 @@
             grid-template-columns: repeat(6, 1fr);
             justify-content: space-evenly;
             justify-items: center;
-            row-gap: 1.5em;
+            row-gap: 1.8vw;
         }
 
         .artist-card {
@@ -131,10 +131,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: clip;
-            -webkit-transition: all 1s;
-            -moz-transition: all 1s;
-            -o-transition: all 1s;
-            transition: all 1s;
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            -o-transition: all 500ms;
+            transition: all 500ms;
         }
 
         /* Hover effects */
@@ -160,7 +160,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .artist-card {
-                width: clamp(80px, 35vw, 250px);
+                width: clamp(60px, 37vw, 350px);
             }
         }
 
@@ -169,7 +169,7 @@
                 grid-template-columns: repeat(3, 1fr);
             }
             .artist-card {
-                width: clamp(70px, 28vw, 150px);
+                width: clamp(70px, 25vw, 175px);
             }
         }
 
@@ -191,11 +191,11 @@
             }
         }
 
-        @media only screen and (min-width: 900px) {
+        /* @media only screen and (min-width: 1024px) {
             #artists-list {
                 grid-template-columns: repeat(6, 1fr);
             }
             .artist-card {
-                width: clamp(100px, 12vw, 200px);
+                width: clamp(147px, 15vw, 200px);
             }
-        }
+        } */
