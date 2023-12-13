@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
 	"text/template"
 )
 
@@ -48,7 +49,6 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 func ErrorPage(err error, code int) {
 	if err != nil {
 		panic(err)
-		fmt.Print(code)
-		fmt.Print(" ERROR\n")
+		fmt.Println(strconv.Itoa(code) + " ERROR")
 	}
 }
