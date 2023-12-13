@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+@font-face {
+    font-family: 'Gandhi';
+    src: url('/assets/fonts/Gandhi.otf');
+}
+
 :root{
     --primary-color: black;
     --card-width: clamp(150px, 12vw, 200px);
@@ -11,25 +16,23 @@
             grid-template-rows: clamp(4em, 25vh, 8em) auto;
             margin: 0;
             padding: 0;
-            row-gap: clamp(12px, 5vh, 38px);
+            /* row-gap: clamp(12px, 5vh, 38px); */
         }
 
         /* SVG Arrow */
         .st0{
             fill:var(--primary-color);
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            -webkit-transition: fill 500ms;
+            -moz-transition: fill 500ms;
+            -o-transition: fill 500ms;
+            transition: fill 500ms;
         }
 	    .st1{
             fill-rule:evenodd;
             clip-rule:evenodd;
             fill:#FFFFFF;
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            transition-duration: 500ms;
+            transition-timing-function: fill-rule, clip-rule, fill;
         }
         /*---------------------*/
 
@@ -42,15 +45,13 @@
             margin: auto;
             font-size: clamp(1em, 5vw, 4em);
             color: black;
-            font-family: 'Noto Serif Display', serif;
-            /* text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.95); */
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
         #artists-list {
-            padding: 0 1vw 1vw 1vw;
+            padding: 1vw;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             justify-content: space-evenly;
@@ -71,10 +72,8 @@
             padding: 18px;
             justify-content: space-between;
             cursor: pointer;
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            transition-duration: 500ms;
+            transition-property: color, background-color, box-shadow;
         }
         
         .artist-image {
@@ -131,10 +130,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: clip;
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            transition-duration: 500ms;
+            transition-property: width, background-color, color, padding;
+            transition-timing-function: ease-in-out;
         }
 
         /* Hover effects */
@@ -190,12 +188,3 @@
                 width: clamp(100px, 14vw, 200px);
             }
         }
-
-        /* @media only screen and (min-width: 1024px) {
-            #artists-list {
-                grid-template-columns: repeat(6, 1fr);
-            }
-            .artist-card {
-                width: clamp(147px, 15vw, 200px);
-            }
-        } */
