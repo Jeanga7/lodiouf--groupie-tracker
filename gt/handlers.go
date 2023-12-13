@@ -1,30 +1,14 @@
 package gt
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"strconv"
 	"text/template"
 )
 
 var BaseURL = "https://groupietrackers.herokuapp.com/api/"
-
-func ReadAPI(url string, allDatas interface{}) {
-	r, err := http.Get(url)
-	ErrorPage(err, 500)
-	defer r.Body.Close()
-
-	data, err1 := io.ReadAll(r.Body)
-	ErrorPage(err1, 500)
-
-	err1 = json.Unmarshal(data, &allDatas)
-	if err1 != nil {
-		ErrorPage(err1, 500)
-	}
-}
 
 func HandlePage(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -61,7 +45,6 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		ErrorPage(err, 500)
 	}
 }
-
 
 func ErrorPage(err error, code int) {
 	if err != nil {

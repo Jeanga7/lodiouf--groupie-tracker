@@ -1,6 +1,15 @@
 package gt
 
-import "sync"
+import (
+	"encoding/json"
+	"io"
+	"net/http"
+	"os"
+	"sync"
+)
+
+const cacheFilePath = "cache.json"
+
 
 var endpoints = map[string]interface{}{
 	"artists":   &[]Artist{},
@@ -9,7 +18,44 @@ var endpoints = map[string]interface{}{
 	"relation":  &Relation{},
 }
 
+func ReadAPI(url string, allDatas interface{}) {
+	r, err := http.Get(url)
+	ErrorPage(err, 500)
+	defer r.Body.Close()
+
+	data, err1 := io.ReadAll(r.Body)
+	ErrorPage(err1, 500)
+
+	err1 = json.Unmarshal(data, &allDatas)
+	if err1 != nil {
+		ErrorPage(err1, 500)
+	}
+}
+
+func WriteCachedData(data interface{}) error {
+	file, err := os.Create(cacheFilePath)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	encoder := json.NewEncoder(file)
+	return encoder.Encode(data)
+}
+
+func ReadCachedData(data interface{}) error {
+	file, err := os.Open(cacheFilePath)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	decoder := json.NewDecoder(file)
+	return decoder.Decode(data)
+}
+
 func Parse() {
+
 	var wg sync.WaitGroup
 	ch := make(chan string)
 
@@ -17,18 +63,25 @@ func Parse() {
 		wg.Add(1)
 		go func(endpoint string, data interface{}) {
 			defer wg.Done()
-			ReadAPI(BaseURL+endpoint, data)
+
+			err := ReadCachedData(data)
+			if err != nil {
+				ReadAPI(BaseURL+endpoint, data)
+
+				err := WriteCachedData(data)
+				if err != nil {
+					ErrorPage(err, 500)
+				}
+			}
 			ch <- endpoint
 		}(endpoint, data)
 	}
 
-	// Attend que toutes les goroutines soient terminées
 	go func() {
 		wg.Wait()
 		close(ch)
 	}()
 
-	// Utilisez le canal pour synchroniser la fin de l'exécution de toutes les goroutines
 	for range endpoints {
 		<-ch
 	}
