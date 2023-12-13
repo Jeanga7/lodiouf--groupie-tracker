@@ -27,9 +27,7 @@ func ReadAPI(url string, allDatas interface{}) {
 	ErrorPage(err1, 500)
 
 	err1 = json.Unmarshal(data, &allDatas)
-	if err1 != nil {
-		ErrorPage(err1, 500)
-	}
+	ErrorPage(err1, 500)
 }
 
 func WriteCachedData(data interface{}) error {
@@ -69,9 +67,7 @@ func Parse() {
 				ReadAPI(BaseURL+endpoint, data)
 
 				err := WriteCachedData(data)
-				if err != nil {
-					ErrorPage(err, 500)
-				}
+				ErrorPage(err, 500)
 			}
 			ch <- endpoint
 		}(endpoint, data)
