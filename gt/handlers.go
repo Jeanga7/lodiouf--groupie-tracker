@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 	"text/template"
 )
@@ -34,7 +35,7 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		data.Artists = *endpoints["artists"].(*[]Artist)
 		data.Locations = *endpoints["locations"].(*Location)
 		data.Dates = *endpoints["dates"].(*Date)
-		data.Relations = *endpoints["relation"].(*Relation)
+		data.Relations = RedableRelations(*endpoints["relation"].(*Relation))
 
 		t, err := template.ParseFiles("vues/index.html")
 		ErrorPage(err, 500)
@@ -49,6 +50,8 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 func ErrorPage(err error, code int) {
 	if err != nil {
 		fmt.Println(strconv.Itoa(code) + " ERROR")
+		os.Exit(1)
 		panic(err)
+		
 	}
 }
