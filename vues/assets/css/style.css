@@ -46,6 +46,10 @@
             letter-spacing: 2px;
             text-transform: uppercase;
         }
+        #title-svg {
+            margin: auto;
+            width: 75vw;
+        }
         #artists-list {
             padding: 1vw;
             display: grid;
