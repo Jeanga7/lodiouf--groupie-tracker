@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+@font-face {
+    font-family: 'Gandhi';
+    src: url('/assets/fonts/Gandhi.otf');
+}
 :root{
     --primary-color: black;
     --card-width: clamp(150px, 12vw, 200px);
@@ -11,28 +14,24 @@
             grid-template-rows: clamp(4em, 25vh, 8em) auto;
             margin: 0;
             padding: 0;
-            row-gap: clamp(12px, 5vh, 38px);
+            /* row-gap: clamp(12px, 5vh, 38px); */
         }
-
         /* SVG Arrow */
         .st0{
             fill:var(--primary-color);
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            -webkit-transition: fill 500ms;
+            -moz-transition: fill 500ms;
+            -o-transition: fill 500ms;
+            transition: fill 500ms;
         }
 	    .st1{
             fill-rule:evenodd;
             clip-rule:evenodd;
             fill:#FFFFFF;
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            transition-duration: 500ms;
+            transition-timing-function: fill-rule, clip-rule, fill;
         }
         /*---------------------*/
-
         #page-title {
             /* background-color: white; */
             display: flex;
@@ -42,22 +41,19 @@
             margin: auto;
             font-size: clamp(1em, 5vw, 4em);
             color: black;
-            font-family: 'Noto Serif Display', serif;
-            /* text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.95); */
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
         #artists-list {
-            padding: 0 1vw 1vw 1vw;
+            padding: 1vw;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             justify-content: space-evenly;
             justify-items: center;
-            row-gap: 1.5em;
+            row-gap: 1.8vw;
         }
-
         .artist-card {
             background-color: white;
             color: #000;
@@ -71,10 +67,8 @@
             padding: 18px;
             justify-content: space-between;
             cursor: pointer;
-            -webkit-transition: all 500ms;
-            -moz-transition: all 500ms;
-            -o-transition: all 500ms;
-            transition: all 500ms;
+            transition-duration: 500ms;
+            transition-property: color, background-color, box-shadow;
         }
         
         .artist-image {
@@ -103,7 +97,6 @@
         .artist-year {
             font-family: 'Poppins';
         }
-
         .green-arrow {
             display: flex;
             height: 30px;
@@ -116,7 +109,6 @@
             display: flex;
             justify-content:end;
         }
-
         .voir-button {
             background-color: var(--primary-color);
             color: white;
@@ -131,12 +123,10 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: clip;
-            -webkit-transition: all 1s;
-            -moz-transition: all 1s;
-            -o-transition: all 1s;
-            transition: all 1s;
+            transition-duration: 500ms;
+            transition-property: width, background-color, color, padding;
+            transition-timing-function: ease-in-out;
         }
-
         /* Hover effects */
         .artist-card:hover {
             box-shadow: 0 0 14px rgb(165, 165, 165);
@@ -146,33 +136,40 @@
         .artist-card:hover .st0{fill:#FFFFFF;}
         .artist-card:hover .st1{fill-rule:evenodd;clip-rule:evenodd;fill:var(--primary-color);}
         .artist-card:hover .voir-button{
-            width: 100%;
+            width: 2.5em;
             padding: 2px 32px 2px 8px;
             background-color: white;
             color: black;
         }
-
         /* -------------------- */
-
         /* Responsivité */
-        @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 349px) {
+            #artists-list {
+                grid-template-columns: auto;
+            }
+            .artist-card {
+                width: 80vw;
+            }
+            .artist-image {
+                width: clamp(80px, 60%, 130px);
+            }
+        }
+        @media only screen and (min-width: 350px) {
             #artists-list {
                 grid-template-columns: repeat(2, 1fr);
             }
             .artist-card {
-                width: clamp(80px, 35vw, 250px);
+                width: clamp(60px, 37vw, 350px);
             }
         }
-
         @media only screen and (min-width: 600px) {
             #artists-list {
                 grid-template-columns: repeat(3, 1fr);
             }
             .artist-card {
-                width: clamp(70px, 28vw, 150px);
+                width: clamp(70px, 25vw, 175px);
             }
         }
-
         @media only screen and (min-width: 700px) {
             #artists-list {
                 grid-template-columns: repeat(4, 1fr);
@@ -181,7 +178,6 @@
                 width: clamp(120px, 18vw, 200px);
             }
         }
-
         @media only screen and (min-width: 800px) {
             #artists-list {
                 grid-template-columns: repeat(5, 1fr);
@@ -191,7 +187,7 @@
             }
         }
 
-        @media only screen and (min-width: 900px) {
+        @media only screen and (min-width: 968px) {
             #artists-list {
                 grid-template-columns: repeat(6, 1fr);
             }
