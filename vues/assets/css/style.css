@@ -26,7 +26,8 @@ body {
     height: 100%;
     width: 100%;
     z-index: 999;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0,0.4);
+    backdrop-filter: blur(6px);
     position: fixed;
     top: 0;
     left: 0;
@@ -168,8 +169,6 @@ body {
 .artist-bottom-box {
     display: flex;
     justify-content: space-between;
-}
-.artist-year {
 }
 .green-arrow {
     display: flex;
