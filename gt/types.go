@@ -37,3 +37,11 @@ type Relation struct {
 type Index struct {
 	Content string `json:"index"`
 }
+//======================================================================================
+
+type AllData struct {
+	Artists   []Artist
+	Locations Location
+	Dates     Date
+	Relations  Relation
+}
