@@ -37,11 +37,35 @@ type Relation struct {
 type Index struct {
 	Content string `json:"index"`
 }
+
 //======================================================================================
 
 type AllData struct {
-	Artists   []Artist
-	Locations Location
-	Dates     Date
-	Relations  Relation
+	Artists      []Artist
+	Locations    Location
+	Dates        Date
+	Relations    Relation
+	FinalArtists []FinalArtist
+}
+
+type FinalArtist struct {
+	Id           int      `json:"id"`
+	Image        string   `json:"image"`
+	Name         string   `json:"name"`
+	Members      []string `json:"members"`
+	CreationDate int      `json:"creationDate"`
+	FirstAlbum   string   `json:"firstAlbum"`
+	Locations    struct {
+		Id        int      `json:"id"`
+		Locations []string `json:"locations"`
+		Dates     string   `json:"dates"`
+	}
+	ConcertDates struct {
+		Id    int      `json:"id"`
+		Dates []string `json:"dates"`
+	}
+	Relations struct {
+		Id             int                 `json:"id"`
+		DatesLocations map[string][]string `json:"datesLocations"`
+	}
 }
