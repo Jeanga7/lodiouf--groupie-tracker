@@ -13,7 +13,7 @@
             <img src="/assets/svg/title.svg" id="title-svg">
         </div>
         <div id="artists-list">
-            {{ range .Artists }}
+            {{ range .FinalArtists }}
             <div class="artist-card">
                 <div class="artist-top-box">
                     <img src="{{ .Image }}" alt="Queen" class="artist-image">
@@ -24,6 +24,7 @@
                     <!-- Hidden values -->
                     <span class="artist-members">{{ .Members }}</span>
                     <span class="artist-firstAlbum">{{ .FirstAlbum }}</span>
+                    <span class="artist-relations">{{ .Relations }}</span>
                     <!-- Hidden values end -->
                     <span class="voir-zone">
                         <span class="voir-button">VOIR</span>

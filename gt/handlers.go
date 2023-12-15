@@ -23,7 +23,7 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		ErrorPage(errors.New("MÉTHOD NOT ALLOWED"), "", 405)
 		return
 	default:
-	tStart := time.Now()
+		tStart := time.Now()
 		var data AllData
 		parseDone := make(chan struct{})
 
@@ -31,13 +31,17 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 			Parse()
 			close(parseDone)
 		}()
-		
+
 		<-parseDone
 
 		data.Artists = *endpoints["artists"].(*[]Artist)
 		data.Locations = *endpoints["locations"].(*Location)
 		data.Dates = *endpoints["dates"].(*Date)
 		data.Relations = RedableRelations(*endpoints["relation"].(*Relation))
+
+		for _, val := range data.Artists {
+			data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, val.Members, val.CreationDate, val.FirstAlbum, data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
+		}
 
 		t, err := template.ParseFiles("vues/index.html")
 		ErrorPage(err, "", 500)

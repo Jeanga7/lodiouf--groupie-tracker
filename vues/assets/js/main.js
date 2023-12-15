@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function(){
             document.querySelector("#modal-creation_date").innerHTML = card.querySelector(".artist-year").innerHTML;
             document.querySelector("#modal-members").innerHTML = card.querySelector(".artist-members").innerHTML;
             document.querySelector("#modal-first_album").innerHTML = card.querySelector(".artist-firstAlbum").innerHTML;
+            document.querySelector("#modal-concerts").innerHTML = card.querySelector(".artist-relations").innerHTML;
 
             // Affichange du modal
             openModal();

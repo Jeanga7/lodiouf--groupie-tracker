@@ -218,7 +218,7 @@ body {
 }
 
 /* Hidden values */
-.artist-members, .artist-firstAlbum {
+.artist-members, .artist-firstAlbum, .artist-relations {
     display: none;
 }
 
