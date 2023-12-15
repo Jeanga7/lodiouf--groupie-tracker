@@ -21,6 +21,10 @@
                 </div>
                 <div class="artist-bottom-box">
                     <span class="artist-year">{{ .CreationDate }}</span>
+                    <!-- Hidden values -->
+                    <span class="artist-members">{{ .Members }}</span>
+                    <span class="artist-firstAlbum">{{ .FirstAlbum }}</span>
+                    <!-- Hidden values end -->
                     <span class="voir-zone">
                         <span class="voir-button">VOIR</span>
                         <span class="green-arrow">
@@ -40,7 +44,7 @@
     <div id="modal">
         <div id="modal-content">
             <div id="modal-body">
-                <img src="https://groupietrackers.herokuapp.com/api/images/joynerlucas.jpeg" id="group-image">
+                <img src="" id="group-image">
                 <div id="group-infos">
                     <div><b>Name : </b> <span id="modal-name">Queen</span></div>
                     <div><b>Members : </b> <span id="modal-members">Freddie Mercury, Brian May, John Daecon, Roger Meddows-Taylor, Mike Grose, Barry Mitchell, Doug Fogie</span></div>
@@ -63,5 +67,6 @@
             <span id="modal-close">&times;</span>
         </div>
     </div>
+    <script src="/assets/js/main.js"></script>
 </body>
 </html>
