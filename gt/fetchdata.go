@@ -1,15 +1,9 @@
 package gt
 
 import (
-	"encoding/json"
-	"io"
-	"net/http"
-	"os"
+	"fmt"
 	"sync"
 )
-
-const cacheFilePath = "cache.json"
-
 
 var endpoints = map[string]interface{}{
 	"artists":   &[]Artist{},
@@ -18,42 +12,8 @@ var endpoints = map[string]interface{}{
 	"relation":  &Relation{},
 }
 
-func ReadAPI(url string, allDatas interface{}) {
-	r, err := http.Get(url)
-	ErrorPage(err, 500)
-	defer r.Body.Close()
-
-	data, err1 := io.ReadAll(r.Body)
-	ErrorPage(err1, 500)
-
-	err1 = json.Unmarshal(data, &allDatas)
-	ErrorPage(err1, 500)
-}
-
-func WriteCachedData(data interface{}) error {
-	file, err := os.Create(cacheFilePath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	encoder := json.NewEncoder(file)
-	return encoder.Encode(data)
-}
-
-func ReadCachedData(data interface{}) error {
-	file, err := os.Open(cacheFilePath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	decoder := json.NewDecoder(file)
-	return decoder.Decode(data)
-}
 
 func Parse() {
-
 	var wg sync.WaitGroup
 	ch := make(chan string)
 
@@ -62,13 +22,25 @@ func Parse() {
 		go func(endpoint string, data interface{}) {
 			defer wg.Done()
 
-			err := ReadCachedData(data)
+			// Tente d'abord de charger les données depuis le cache
+			err := LoadDataFromCache("cache_"+endpoint+".json", data)
 			if err != nil {
-				ReadAPI(BaseURL+endpoint, data)
+				fmt.Println("Errorr de la lecture depuis le cache, appel à l'API ")
 
-				err := WriteCachedData(data)
-				ErrorPage(err, 500)
+				// Si la lecture depuis le cache échoue, on effectue l'appel API
+				err = ReadAPI(BaseURL+endpoint, data)
+				if err != nil {
+					fmt.Println("Error lors de l'appel à l'API ")
+				}
+
+				// Sauvegarde les données dans le cache
+				err = SaveDataToLocalFile("cache_"+endpoint+".json", data)
+				if err != nil {
+					fmt.Println("Error lors de la sauvegarde dans le cache ")
+				}
 			}
+
+			// Signale la fin du traitement de cet endpoint via le canal
 			ch <- endpoint
 		}(endpoint, data)
 	}
@@ -77,7 +49,7 @@ func Parse() {
 		wg.Wait()
 		close(ch)
 	}()
-
+	// Attente que toutes les goroutines aient signalé la fin via le canal
 	for range endpoints {
 		<-ch
 	}
