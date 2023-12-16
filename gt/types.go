@@ -48,6 +48,7 @@ type AllData struct {
 	FinalArtists []FinalArtist
 }
 
+// Données Artistes à afficher
 type FinalArtist struct {
 	Id           int      `json:"id"`
 	Image        string   `json:"image"`

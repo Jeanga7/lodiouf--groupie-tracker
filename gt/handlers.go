@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 	"text/template"
 	"time"
 )
@@ -40,7 +41,7 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		data.Relations = RedableRelations(*endpoints["relation"].(*Relation))
 
 		for _, val := range data.Artists {
-			data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, val.Members, val.CreationDate, val.FirstAlbum, data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
+			data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, []string{strings.Join(val.Members, ", ")}, val.CreationDate, FormatDates([]string{val.FirstAlbum})[0], data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
 		}
 
 		t, err := template.ParseFiles("vues/index.html")
