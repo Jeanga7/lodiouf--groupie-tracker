@@ -1,3 +1,3 @@
 git add .
-git commit -m "Project Updates by @jgoudiab"
+git commit -m "Project Updates"
 git push
