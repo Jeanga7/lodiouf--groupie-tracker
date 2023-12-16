@@ -9,7 +9,6 @@ import (
 )
 
 func ReadAPI(url string, allDatas interface{}) error {
-	fmt.Println("II AAAM READDDDDIIIIIIIIIIINNNNNNNNNG  AAAAPPPPPIIII")
 	r, err := http.Get(url)
 	ErrorPage(err, "Erreur HTTP:", 500)
 	defer r.Body.Close()
@@ -28,7 +27,6 @@ func ReadAPI(url string, allDatas interface{}) error {
 }
 
 func SaveDataToLocalFile(filename string, data interface{}) error {
-	fmt.Println("SSAAAAVVVVVVVVVVVVEEEEEEEEEEEE LOOOOOOCCCCCCAAAAAAAALLLLLLLL")
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -43,7 +41,6 @@ func SaveDataToLocalFile(filename string, data interface{}) error {
 }
 
 func LoadDataFromCache(filename string, data interface{}) error {
-	fmt.Println("LLOOOOOOOOOAAAADDDDDCCCCCCCCAAAAACCCCCHHHHHHHHHEEEEEEE")
 	jsonData, err := os.ReadFile(filename)
 	if err != nil {
 		return err

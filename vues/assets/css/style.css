@@ -54,7 +54,11 @@ body {
     letter-spacing: 1px;
     font-size: 1.2em;
     font-weight: 600;
+    width: 0;
+    display: inline;
+    text-overflow: clip;
 }
+
 #logo {
     font-weight: 700;
     font-size: 1.8em;
