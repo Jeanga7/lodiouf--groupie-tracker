@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"strings"
 	"text/template"
 	"time"
@@ -15,13 +14,15 @@ var BaseURL = "https://groupietrackers.herokuapp.com/api/"
 
 func HandlePage(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		ErrorPage(errors.New("PAGE NOT FOUND"), "", 404)
+		err := ErrorTemporary("PAGE NOT FOUND 1")
+		ErrorPage(err, "PAGE NOT FOUND", w, 404)
 		return
 	}
 
 	switch r.Method {
 	case "POST":
-		ErrorPage(errors.New("MÉTHOD NOT ALLOWED"), "", 405)
+		err := errors.New("Method Not Allowed")
+		ErrorPage(err, "METHOD NOT ALLOWED", w, 405)
 		return
 	default:
 		tStart := time.Now()
@@ -32,7 +33,7 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 			Parse()
 			close(parseDone)
 		}()
-		
+
 		<-parseDone
 
 		data.Artists = *endpoints["artists"].(*[]Artist)
@@ -45,22 +46,33 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		}
 
 		t, err := template.ParseFiles("vues/index.html")
-		ErrorPage(err, "", 500)
+		ErrorPage(err, "", w, 500)
 
 		tmpl := template.Must(t, err)
 
 		err = tmpl.Execute(w, data)
-		ErrorPage(err, "", 500)
+		ErrorPage(err, "", w, 500)
 
+		showErrorScript := `
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+					document.getElementById("error-message").style.display = "block";
+				});
+			</script>
+		`
+		fmt.Fprint(w, showErrorScript)
 		elapsed := time.Since(tStart)
-		log.Printf("Parsing took %.8fs\n", elapsed.Seconds())
+		log.Printf("Parsing took %.4fs\n", elapsed.Seconds())
 	}
 }
 
-func ErrorPage(err error, msg string, code int) {
-	if err != nil {
-		fmt.Println(strconv.Itoa(code) + " ERROR")
-		panic(err)
+func ErrorTemporary(s string) error {
+	return fmt.Errorf(s)
+}
 
+func ErrorPage(err error, msg string, w http.ResponseWriter, code int) {
+	if err != nil {
+		log.Printf("%d ERROR: %s - %v\n", code, msg, err)
+		http.Error(w, fmt.Sprintf("%d %s", code, msg), code)
 	}
 }

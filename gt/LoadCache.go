@@ -9,16 +9,16 @@ import (
 )
 
 func ReadAPI(url string, allDatas interface{}) error {
-	fmt.Println("II AAAM READDDDDIIIIIIIIIIINNNNNNNNNG  AAAAPPPPPIIII")
+	fmt.Println("I AM READING API")
 	r, err := http.Get(url)
-	ErrorPage(err, "Erreur HTTP:", 500)
+	ErrorPage(err, "Erreur HTTP:",nil, 500)
 	defer r.Body.Close()
 
 	data, err1 := io.ReadAll(r.Body)
-	ErrorPage(err1, "", 500)
+	ErrorPage(err1, "",nil, 500)
 
 	err1 = json.Unmarshal(data, &allDatas)
-	ErrorPage(err1, "", 500)
+	ErrorPage(err1, "",nil, 500)
 	_, errNetwork := http.Get(url)
 	if errNetwork != nil {
 		return fmt.Errorf("erreur lors de l'appel à l'API : %v", err)
@@ -28,7 +28,7 @@ func ReadAPI(url string, allDatas interface{}) error {
 }
 
 func SaveDataToLocalFile(filename string, data interface{}) error {
-	fmt.Println("SSAAAAVVVVVVVVVVVVEEEEEEEEEEEE LOOOOOOCCCCCCAAAAAAAALLLLLLLL")
+	fmt.Println("LAST DATAS FETCHED HAS BENN SAVED IN LOCAL STORAGE")
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return err
@@ -43,7 +43,7 @@ func SaveDataToLocalFile(filename string, data interface{}) error {
 }
 
 func LoadDataFromCache(filename string, data interface{}) error {
-	fmt.Println("LLOOOOOOOOOAAAADDDDDCCCCCCCCAAAAACCCCCHHHHHHHHHEEEEEEE")
+	fmt.Println("LOADED FROM LOCAL CACHE")
 	jsonData, err := os.ReadFile(filename)
 	if err != nil {
 		return err
