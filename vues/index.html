@@ -22,9 +22,22 @@
                 <div class="artist-bottom-box">
                     <span class="artist-year">{{ .CreationDate }}</span>
                     <!-- Hidden values -->
-                    <span class="artist-members">{{ .Members }}</span>
+                    <span class="artist-members">{{ index .Members 0 }}</span>
                     <span class="artist-firstAlbum">{{ .FirstAlbum }}</span>
-                    <span class="artist-relations">{{ .Relations }}</span>
+                    <span class="artist-relations">
+                        <ul class="artist-concerts">
+                            {{ range $place, $dates := .Relations.DatesLocations }}
+                            <li>
+                                {{ $place }} :
+                                <ul>
+                                    {{ range $i, $date := $dates }}
+                                    <li>{{ $date }}</li>
+                                    {{ end }}
+                                </ul>
+                            </li>
+                            {{ end }}
+                        </ul>
+                    </span>
                     <!-- Hidden values end -->
                     <span class="voir-zone">
                         <span class="voir-button">VOIR</span>
