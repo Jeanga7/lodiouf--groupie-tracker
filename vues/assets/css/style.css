@@ -91,6 +91,7 @@ body {
     flex-direction: column;
     row-gap: 12px;
     height: clamp(50px, 50vh, 150px);
+    box-sizing: border-box;
 }
 
 /* SVG Arrow */
@@ -208,6 +209,13 @@ body {
     padding-left: 0;
 }
 
+#footer {
+    text-align: center;
+    padding: 18px;
+    margin-top: 8px;
+    background-color: white;
+}
+
 /* Hover effects */
 .artist-card:hover {
     box-shadow: 0 0 14px rgb(165, 165, 165);
@@ -284,7 +292,9 @@ body {
         width: clamp(90px, 11vw, 200px);
     }
     #modal-content {
-        width: clamp(300px, 60vw, 600px);
+        width: auto;
+        min-width: 300px;
+        max-width: 600px;
         height: auto;
     }
     #modal-body {
