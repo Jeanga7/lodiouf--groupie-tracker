@@ -30,17 +30,22 @@ body {
 /* HEADER */
 /* ------------------- */
 #header {
-    background-color: rgba(0, 0, 0,0);
     color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    position: relative;
+    position: sticky;
+    top: 0;
     margin: 0;
     padding: 24px;
+    z-index: 9999;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 #header .fas {
     font-size: 1.1em;
+}
+#filter-box, #search-box {
+    margin: auto 0;
 }
 #filter-text {
     margin-left: 12px;
@@ -74,16 +79,42 @@ body {
     background-position: center center;
     display: grid;
     grid-template-rows: 60% 40%;
+    justify-items: center;
 }
 #project-name {
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: end;
+    width: fit-content;
+}
+#project-name h1 {
     color: white;
     font-size: 4em;
     letter-spacing: 4px;
+    padding-right: 4px;
+    border-right: 8px solid white;
+    margin: 0 auto;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: 
+        typing 7s cubic-bezier(0,.98,.82,1),
+        blinking-caret .75s step-end infinite;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
+
+@keyframes typing {
+    from {width: 0;}
+    to {width: 100%;}
+}
+
+@keyframes blinking-caret {
+    from, to {border-color: transparent;}
+    50% {border-color: white;}
+}
+
 #call-to-action {
     padding-bottom: 5vh;
     text-align: center;

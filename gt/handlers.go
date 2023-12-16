@@ -61,6 +61,5 @@ func ErrorPage(err error, msg string, code int) {
 	if err != nil {
 		fmt.Println(strconv.Itoa(code) + " ERROR")
 		panic(err)
-
 	}
 }

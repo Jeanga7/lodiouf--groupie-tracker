@@ -62,6 +62,16 @@ document.addEventListener("DOMContentLoaded", function(){
         document.querySelector("#modal").style.opacity = "0";
         document.querySelector("#modal").style.backdropFilter = "blur(0px)";
     }
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            document.querySelector("#header").style.backgroundColor = "white";
+            document.querySelector("#header").style.color = "black";
+        } else {
+            document.querySelector("#header").style.backgroundColor = "transparent";
+            document.querySelector("#header").style.color = "white";
+        }
+    }
     // ---------------------------------------------------------------------------
  
  });
