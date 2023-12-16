@@ -35,6 +35,13 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 
+    document.querySelectorAll("#see-artists, #arrow-scroll-down").forEach(function(element) {
+        element.addEventListener("click", function(){
+            document.querySelector("#artists").scrollIntoView({behavior: 'smooth'});
+        });
+     });
+     
+
 
     // Fonctions
     // ---------------------------------------------------------------------------

@@ -6,6 +6,10 @@
     --card-height: 190px;
 }
 
+html {
+    scroll-behavior: smooth;
+  }
+
 body {
     padding: 0;
     margin: 0;
@@ -94,6 +98,7 @@ body {
     transition-timing-function: ease-in-out;
     transition-property: background-color, color;
     transition-duration: 200ms;
+    animation: float 3s ease-in-out infinite;
 }
 #see-artists:hover {
     color: white;

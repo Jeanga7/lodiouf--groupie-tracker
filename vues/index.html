@@ -23,51 +23,53 @@
             <h1 id="project-name">GROUPIE TRACKER</h1>
             <div id="call-to-action">
                 <span id="see-artists">SEE ARTISTS</span>
-                <i class="fa-solid fa-angle-down"></i>
+                <i class="fa-solid fa-angle-down" id="arrow-scroll-down"></i>
             </div>
         </div>
-        <h2 id="artists-list-title">Artists</h2>
-        <div id="artists-list">
-            {{ range .FinalArtists }}
-            <div class="artist-card">
-                <div class="artist-top-box">
-                    <img src="{{ .Image }}" alt="Queen" class="artist-image">
-                    <span class="artist-name">{{ .Name }}</span>
-                </div>
-                <div class="artist-bottom-box">
-                    <span class="artist-year">{{ .CreationDate }}</span>
-                    <!-- Hidden values -->
-                    <span class="artist-members">{{ index .Members 0 }}</span>
-                    <span class="artist-firstAlbum">{{ .FirstAlbum }}</span>
-                    <span class="artist-relations">
-                        <ul class="artist-concerts">
-                            {{ range $place, $dates := .Relations.DatesLocations }}
-                            <li>
-                                {{ $place }} :
-                                <ul>
-                                    {{ range $i, $date := $dates }}
-                                    <li>{{ $date }}</li>
-                                    {{ end }}
-                                </ul>
-                            </li>
-                            {{ end }}
-                        </ul>
-                    </span>
-                    <!-- Hidden values end -->
-                    <span class="voir-zone">
-                        <span class="voir-button">VOIR</span>
-                        <span class="green-arrow">
-                            <svg version="1.1" id="Arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
-                                <g>
-                                    <circle class="st0" cx="16" cy="16" r="15.4"/>
-                                    <path class="st1" d="M10.7,7.1c1-1,2.6-1,3.6,0l7,7c1,1,1,2.6,0,3.6l-7,7c-1,1-2.6,1-3.6,0s-1-2.6,0-3.6l5.2-5.2l-5.2-5.2 C9.7,9.8,9.7,8.1,10.7,7.1z"/>
-                                </g>
-                            </svg>
+        <div id="artists">
+            <h2 id="artists-list-title">Artists</h2>
+            <div id="artists-list">
+                {{ range .FinalArtists }}
+                <div class="artist-card">
+                    <div class="artist-top-box">
+                        <img src="{{ .Image }}" alt="Queen" class="artist-image">
+                        <span class="artist-name">{{ .Name }}</span>
+                    </div>
+                    <div class="artist-bottom-box">
+                        <span class="artist-year">{{ .CreationDate }}</span>
+                        <!-- Hidden values -->
+                        <span class="artist-members">{{ index .Members 0 }}</span>
+                        <span class="artist-firstAlbum">{{ .FirstAlbum }}</span>
+                        <span class="artist-relations">
+                            <ul class="artist-concerts">
+                                {{ range $place, $dates := .Relations.DatesLocations }}
+                                <li>
+                                    {{ $place }} :
+                                    <ul>
+                                        {{ range $i, $date := $dates }}
+                                        <li>{{ $date }}</li>
+                                        {{ end }}
+                                    </ul>
+                                </li>
+                                {{ end }}
+                            </ul>
                         </span>
-                    </span>
+                        <!-- Hidden values end -->
+                        <span class="voir-zone">
+                            <span class="voir-button">VOIR</span>
+                            <span class="green-arrow">
+                                <svg version="1.1" id="Arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                                    <g>
+                                        <circle class="st0" cx="16" cy="16" r="15.4"/>
+                                        <path class="st1" d="M10.7,7.1c1-1,2.6-1,3.6,0l7,7c1,1,1,2.6,0,3.6l-7,7c-1,1-2.6,1-3.6,0s-1-2.6,0-3.6l5.2-5.2l-5.2-5.2 C9.7,9.8,9.7,8.1,10.7,7.1z"/>
+                                    </g>
+                                </svg>
+                            </span>
+                        </span>
+                    </div>
                 </div>
+                {{ end }}
             </div>
-            {{ end }}
         </div>
         <div id="footer">
             <small>Designed with <i class="fas fa-heart" style="color: red;"></i> by team <b>@lodiouf, @jgoudiab & @mabdelwe
