@@ -2,7 +2,6 @@ package gt
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -12,16 +11,18 @@ import (
 )
 
 var BaseURL = "https://groupietrackers.herokuapp.com/api/"
+var FileNames = []string{"vues/index.html", "vues/_header.html", "vues/_footer.html", "vues/error.html"}
+var ErrorFileNames = []string{"vues/error.html", "vues/_header.html", "vues/_footer.html"}
 
 func HandlePage(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		ErrorPage(errors.New("PAGE NOT FOUND"), "", 404)
+		ErrorPage(errors.New("PAGE NOT FOUND"), w, 404)
 		return
 	}
 
 	switch r.Method {
 	case "POST":
-		ErrorPage(errors.New("MÉTHOD NOT ALLOWED"), "", 405)
+		ErrorPage(errors.New("METHOD NOT ALLOWED"), w, 405)
 		return
 	default:
 		tStart := time.Now()
@@ -29,7 +30,7 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		parseDone := make(chan struct{})
 
 		go func() {
-			Parse()
+			Parse(w)
 			close(parseDone)
 		}()
 
@@ -44,22 +45,39 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 			data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, []string{strings.Join(val.Members, ", ")}, val.CreationDate, FormatDates([]string{val.FirstAlbum})[0], data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
 		}
 
-		t, err := template.ParseFiles("vues/index.html")
-		ErrorPage(err, "", 500)
+		t, err := (template.ParseFiles(FileNames...))
+		ErrorPage(err, w, 500)
+		t = template.Must(t, err)
 
 		tmpl := template.Must(t, err)
 
 		err = tmpl.Execute(w, data)
-		ErrorPage(err, "", 500)
+		ErrorPage(err, w, 500)
 
 		elapsed := time.Since(tStart)
 		log.Printf("Parsing took %.8fs\n", elapsed.Seconds())
 	}
 }
 
-func ErrorPage(err error, msg string, code int) {
+func ErrorPage(err error, w http.ResponseWriter, code int) {
 	if err != nil {
-		fmt.Println(strconv.Itoa(code) + " ERROR")
-		panic(err)
+		errorName := map[int]string{
+			404: "PAGE NOT FOUND",
+			405: "METHOD NOT ALLOWED",
+			500: "INTERNAL SERVER ERROR",
+			400: "BAD REQUEST",
+		}
+
+		w.WriteHeader(code)
+
+		tmpl, err := template.ParseFiles(ErrorFileNames...)
+		if err != nil {
+			panic(err)
+		}
+		data := map[string]string{
+			"error_code": strconv.Itoa(code),
+			"error_name": errorName[code],
+		}
+		tmpl.Execute(w, data)
 	}
 }
