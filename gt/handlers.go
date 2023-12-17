@@ -46,14 +46,21 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		}
 
 		t, err := (template.ParseFiles(FileNames...))
-		ErrorPage(err, w, 500)
+		//necessaire de verifier l'erreur
+		if err != nil {
+			ErrorPage(err, w, 500)
+			return
+		}
 		tmpl := template.Must(t, err)
 
 		err = tmpl.Execute(w, data)
-		ErrorPage(err, w, 500)
+		if err != nil {
+			ErrorPage(err, w, 500)
+			return
+		}
 
 		elapsed := time.Since(tStart)
-		log.Printf("Parsing took %.8fs\n", elapsed.Seconds())
+		log.Printf("Parsing took %.4fs\n", elapsed.Seconds())
 	}
 }
 
@@ -80,3 +87,4 @@ func ErrorPage(err error, w http.ResponseWriter, code int) {
 		tmpl.Execute(w, data)
 	}
 }
+ 

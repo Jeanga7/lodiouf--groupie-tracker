@@ -10,14 +10,20 @@ import (
 
 func ReadAPI(url string, w http.ResponseWriter, allDatas interface{}) error {
 	r, err := http.Get(url)
-	ErrorPage(err, w, 500)
+	if err != nil {
+		ErrorPage(err, w, 500)
+	}
 	defer r.Body.Close()
 
 	data, err1 := io.ReadAll(r.Body)
-	ErrorPage(err1, w, 500)
+	if err != nil {
+		ErrorPage(err1, w, 500)
+	}
 
 	err1 = json.Unmarshal(data, &allDatas)
-	ErrorPage(err1, w, 500)
+	if err != nil {
+		ErrorPage(err1, w, 500)
+	}
 	_, errNetwork := http.Get(url)
 	if errNetwork != nil {
 		return fmt.Errorf("erreur lors de l'appel à l'API : %v", err)
