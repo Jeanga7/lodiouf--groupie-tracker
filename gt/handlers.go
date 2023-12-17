@@ -11,7 +11,7 @@ import (
 )
 
 var BaseURL = "https://groupietrackers.herokuapp.com/api/"
-var FileNames = []string{"vues/index.html", "vues/_header.html", "vues/_footer.html", "vues/error.html"}
+var FileNames = []string{"vues/index.html", "vues/_header.html", "vues/_footer.html"}
 var ErrorFileNames = []string{"vues/error.html", "vues/_header.html", "vues/_footer.html"}
 
 func HandlePage(w http.ResponseWriter, r *http.Request) {
@@ -47,8 +47,6 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 
 		t, err := (template.ParseFiles(FileNames...))
 		ErrorPage(err, w, 500)
-		t = template.Must(t, err)
-
 		tmpl := template.Must(t, err)
 
 		err = tmpl.Execute(w, data)
@@ -74,6 +72,7 @@ func ErrorPage(err error, w http.ResponseWriter, code int) {
 		if err != nil {
 			panic(err)
 		}
+		tmpl = template.Must(tmpl, err)
 		data := map[string]string{
 			"error_code": strconv.Itoa(code),
 			"error_name": errorName[code],

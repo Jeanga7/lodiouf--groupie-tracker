@@ -19,7 +19,7 @@ body {
 }
 
 #error-code {
-    font-size: clamp(2em, 12vw, 12em);
+    font-size: clamp(4em, 12vw, 12em);
     line-height: 1px;
 }
 #error-home-link {
