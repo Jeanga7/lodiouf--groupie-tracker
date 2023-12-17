@@ -5,43 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/assets/img/g-favicon.png">
     <title>{{ or .error_name "INTERNAL SERVER ERROR" }}</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/header-footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/assets/css/error.css">
 </head>
 <body>
     {{template "header"}}
 
-    <div id="container">
-        <div class="error-container">
-            <div id="error-infos">
-                <h1 id="error-title">{{ or .error_code "500" }}</h1>
-                <h1 class="title">{{ or .error_name "INTERNAL SERVER ERROR" }}</h1>
-                <a href="/" id="error-home-link"><i class="fa-solid fa-arrow-left"></i> Home</a>
-            </div>
+    <div id="error-container">
+        <div id="error-infos">
+            <h2>
+                <span id="error-code">{{ or .error_code "500" }}</span><br>
+                <span id="error-title">{{ or .error_name "INTERNAL SERVER ERROR" }}</span>
+            </h2>
+            <a href="/" id="error-home-link"><i class="fa-solid fa-arrow-left"></i> Retour à l'Accueil</a>
         </div>
+    </div>
 
-        {{template "footer"}}
-    </div>
-    <div id="modal">
-        <div id="modal-content">
-            <div id="modal-body">
-                <img src="" id="group-image">
-                <div id="group-infos">
-                    <div><b>Name : </b> <span id="modal-name">...</span></div>
-                    <div><b>Members : </b> <span id="modal-members">...</span></div>
-                    <div><b>Creation Date : </b> <span id="modal-creation_date">...</span></div>
-                    <div><b>First Album : </b> <span id="modal-first_album">...</span></div>
-                    <div>
-                        <b>Planned Concerts : </b>
-                        <ul id="modal-concerts">
-                            <li>...</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <span id="modal-close">&times;</span>
-        </div>
-    </div>
-    <script src="/assets/js/main.js"></script>
+    {{template "footer"}}
+
+    <script>
+        document.querySelector("#header").style.backgroundColor = "white";
+        document.querySelector("#header").style.color = "black";
+        document.querySelector("#header").style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)";
+        document.querySelector("#logo").innerHTML = '<b style="color:#14213d;">g</b><b style="color:#7e8d85;">t</b><b style="color:#720026;">.</b>';
+        
+        document.querySelector("#logo").addEventListener("click", function(){
+            location.href = "/";
+        });
+    </script>
 </body>
 </html>
