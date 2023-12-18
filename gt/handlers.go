@@ -48,14 +48,14 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		t, err := (template.ParseFiles(FileNames...))
 		//necessaire de verifier l'erreur
 		if err != nil {
-			ErrorPage(err, w, 500)
+			ErrorPage(err, w, http.StatusInternalServerError)
 			return
 		}
 		tmpl := template.Must(t, err)
 
 		err = tmpl.Execute(w, data)
 		if err != nil {
-			ErrorPage(err, w, 500)
+			ErrorPage(err, w, http.StatusInternalServerError)
 			return
 		}
 
@@ -67,10 +67,10 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 func ErrorPage(err error, w http.ResponseWriter, code int) {
 	if err != nil {
 		errorName := map[int]string{
-			404: "PAGE NOT FOUND",
-			405: "METHOD NOT ALLOWED",
-			500: "INTERNAL SERVER ERROR",
-			400: "BAD REQUEST",
+			http.StatusNotFound:            http.StatusText(http.StatusNotFound),
+			http.StatusMethodNotAllowed:    http.StatusText(http.StatusMethodNotAllowed),
+			http.StatusInternalServerError: http.StatusText(http.StatusInternalServerError),
+			http.StatusBadRequest:          http.StatusText(http.StatusBadRequest),
 		}
 
 		w.WriteHeader(code)
@@ -87,4 +87,3 @@ func ErrorPage(err error, w http.ResponseWriter, code int) {
 		tmpl.Execute(w, data)
 	}
 }
- 
