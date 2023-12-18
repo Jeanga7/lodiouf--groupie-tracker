@@ -1,23 +1,23 @@
-# `PROJECT'S TITLE:` "GROUPIE~TRACKER"
+# `PROJECT'S TITLE:`  🎧GROUPIE~TRACKER🎧
 
-## `TABLE OF CONTENTS`
-- [OBJECTIVES](#objectives)
-- [DESCRIPTION](#description)
-- [FEATURES](#features)
-- [HOW_TO_RUN](#🚀how_to_run)
+## `TABLE OF CONTENTS🎶`
+- [🎯 OBJECTIVES](#🎯objectives)
+- [📑DESCRIPTION](#📑description)
+- [🛠️FEATURES](#🛠️features)
+- [🧭HOW_TO_RUN](#🧭how_to_run)
 - [MAIN-INTERFACE](#🖥️interface)
-- [AUTHORS](#)
+- [👤AUTHORS](#👤authors)
 
-## `OBJECTIVES:`
+## 🎯`OBJECTIVES:`
 __Groupie Trackers__ consists on receiving a given __API__ and manipulate the data contained in it, in order to create a site, displaying the information.
 
 It will be given an API, that consists in four parts:
-   - Artists
-   - Locations
-  -  Dates
-  -  Relation.
+   - 📀Artists
+   - 📍Locations
+  -  🗓️Dates
+  -  🎫Relation.
 
-  ## `DESCRIPTION:`
+  ## 📑`DESCRIPTION:`
  
  Groupie tracker is an innovative website offering complete immersion in the musical universe of your favorite artists. Our project is based on a robust API, divided into four essential components:
    - Artists: Explore detailed profiles featuring band member information, captivating images and early activity.
@@ -27,7 +27,7 @@ It will be given an API, that consists in four parts:
    - Dates : Don't miss any concert dates with our dedicated section for past and upcoming performances.
 
    - Relations: Link artists, dates and locations for a complete music experience.
-### `FEATURES:`
+### 🛠️`FEATURES:`
 
 - Rich visualizations: explore the details through well-organized maps of your favorite artists
  <!-- - Personalization: Customize your experience by filtering results by year, music genre or location. -->
@@ -35,7 +35,7 @@ It will be given an API, that consists in four parts:
 - Real-time updates: Enjoy instant updates on artists, venues and dates thanks to dynamic API integration.
 
 
-## 🚀`HOW_TO_RUN`
+## 🧭`HOW_TO_RUN`
 ### 🐾`TO RUN IT:`
 _Make sure you're in the right folder, and set to terminal the command below to Start the web server:_
 ```bash
@@ -57,16 +57,26 @@ _Access the web application in your browser_
    - 🔢 The user can repeat the process with new card or a different artist.
    <!-- - 🔢 -->
 
-### `🚷 Error Handling`
+### 🚷`Error Handling`
 The web server handles various error scenarios (errors that have been taken into account and should be avoided ), such as:
 - ⚠️ 404 Not Found: Page not found.
 - ⚠️ 400 Bad Request: Invalid request.
 - ⚠️ 405 Method Not Allowed: HTTP request with an unauthorized method
 - ⚠️ 500 Internal Server Error: Server-side errors.
 
-## `🖥️INTERFACE`
+## 🖥️`INTERFACE`
 
 
-![Main Interface](./assets/img/Screenshot.png)
+![Main Interface](/vues/assets/img/homeinterface.png)
 
 <hr>
+
+![Main Interface](/vues/assets/img/homeinterface2.png)
+<hr>
+Interface de la page d'accueil GROUPIE TRACKER
+<hr>
+
+## 👤`AUTHORS`
++ 🧑[@mabdelwe](https://learn.zone01dakar.sn/git/mabdelwe)
++ 🧑[@lodiouf](https://learn.zone01dakar.sn/git/lodiouf)
++ 🧑[@jgoudiab](https://learn.zone01dakar.sn/git/jgoudiab)
