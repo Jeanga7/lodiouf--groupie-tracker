@@ -2,6 +2,7 @@ package gt
 
 import (
 	"fmt"
+	"net/http"
 	"sync"
 )
 
@@ -12,7 +13,7 @@ var endpoints = map[string]interface{}{
 	"relation":  &Relation{},
 }
 
-func Parse() {
+func Parse(w http.ResponseWriter) {
 	var wg sync.WaitGroup
 	ch := make(chan string)
 
@@ -24,18 +25,18 @@ func Parse() {
 			// Tente d'abord de charger les données depuis le cache
 			err := LoadDataFromCache("cache_"+endpoint+".json", data)
 			if err != nil {
-				fmt.Println("Errorr de la lecture depuis le cache, appel à l'API ")
+				fmt.Println("Erreur de la lecture depuis le cache, appel à l'API ")
 
 				// Si la lecture depuis le cache échoue, on effectue l'appel API
-				err = ReadAPI(BaseURL+endpoint, data)
+				err = ReadAPI(BaseURL+endpoint, w, data)
 				if err != nil {
-					fmt.Println("Error lors de l'appel à l'API ")
+					fmt.Println("Erreur lors de l'appel à l'API ")
 				}
 
 				// Sauvegarde les données dans le cache
 				err = SaveDataToLocalFile("cache_"+endpoint+".json", data)
 				if err != nil {
-					fmt.Println("Error lors de la sauvegarde dans le cache ")
+					fmt.Println("Erreur lors de la sauvegarde dans le cache ")
 				}
 			}
 

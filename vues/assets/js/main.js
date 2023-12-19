@@ -35,6 +35,13 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 
+    document.querySelectorAll("#see-artists, #arrow-scroll-down").forEach(function(element) {
+        element.addEventListener("click", function(){
+            document.querySelector("#artists").scrollIntoView({behavior: 'smooth'});
+        });
+     });
+     
+
 
     // Fonctions
     // ---------------------------------------------------------------------------
@@ -48,13 +55,17 @@ document.addEventListener("DOMContentLoaded", function(){
         document.querySelector("#modal").style.visibility = "visible";
         document.querySelector("#modal").style.opacity = "1";
         document.querySelector("#modal").style.backdropFilter = "blur(6px)";
+        document.body.style.overflow = "hidden";
     }
 
     function closeModal() {
         document.querySelector("#modal").style.visibility = "hidden";
         document.querySelector("#modal").style.opacity = "0";
         document.querySelector("#modal").style.backdropFilter = "blur(0px)";
+        document.body.style.overflow = "auto";
     }
+
+    
     // ---------------------------------------------------------------------------
  
  });
