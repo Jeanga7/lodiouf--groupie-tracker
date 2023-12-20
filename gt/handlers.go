@@ -77,7 +77,8 @@ func ErrorPage(err error, w http.ResponseWriter, code int) {
 
 		tmpl, err := template.ParseFiles(ErrorFileNames...)
 		if err != nil {
-			panic(err)
+			http.Error(w, "Error page not found ```delol page bi``` 😠 ", http.StatusInternalServerError)
+			return
 		}
 		tmpl = template.Must(tmpl, err)
 		data := map[string]string{
