@@ -47,10 +47,6 @@ func SaveDataToLocalFile(filename string, data interface{}) error {
 }
 
 func LoadDataFromCache(filename string, data interface{}) error {
-<<<<<<< HEAD
-	fmt.Println("LOADED FROM LOCAL CACHE")
-=======
->>>>>>> 8865b1fc163f8342aeb99c408f8a64d7f76f763f
 	jsonData, err := os.ReadFile(filename)
 	if err != nil {
 		return err
