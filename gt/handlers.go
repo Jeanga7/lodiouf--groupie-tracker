@@ -2,7 +2,6 @@ package gt
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -12,8 +11,8 @@ import (
 )
 
 var BaseURL = "https://groupietrackers.herokuapp.com/api/"
-var FileNames = []string{"vues/index.html", "vues/_header.html", "vues/_footer.html"}
-var ErrorFileNames = []string{"vues/error.html", "vues/_header.html", "vues/_footer.html"}
+var FileNames = []string{"vues/index.html", "vues/_header.html", "vues/_footer.html", "vues/_search_part.html"}
+var ErrorFileNames = []string{"vues/error.html", "vues/_header.html", "vues/_footer.html", "vues/_search_part.html"}
 
 func HandlePage(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -23,8 +22,13 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 
 	switch r.Method {
 	case "POST":
-		ErrorPage(errors.New("METHOD NOT ALLOWED"), w, 405)
+		ErrorPage(errors.New("METHODE NOT ALLOWED"), w, 405)
 		return
+		// r.ParseForm()
+		// searchQuery := r.FormValue("search")
+
+		// fmt.Fprintf(w, "Vous avez recherche: %s", searchQuery)
+		// return
 	default:
 		tStart := time.Now()
 		var data AllData
@@ -40,14 +44,15 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 		data.Artists = *endpoints["artists"].(*[]Artist)
 		data.Locations = *endpoints["locations"].(*Location)
 		data.Dates = *endpoints["dates"].(*Date)
-		data.Relations = RedableRelations(*endpoints["relation"].(*Relation))
+		// data.Relations = RedableRelations(*endpoints["relation"].(*Relation))
+		data.Relations = *endpoints["relation"].(*Relation)
 
 		for _, val := range data.Artists {
-			data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, []string{strings.Join(val.Members, ", ")}, val.CreationDate, FormatDates([]string{val.FirstAlbum})[0], data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
+			// data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, []string{strings.Join(val.Members, ", ")}, val.CreationDate, FormatDates([]string{val.FirstAlbum})[0], data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
+			data.FinalArtists = append(data.FinalArtists, FinalArtist{val.Id, val.Image, val.Name, []string{strings.Join(val.Members, ", ")}, val.CreationDate, val.FirstAlbum, data.Locations.Index[val.Id-1], data.Dates.Index[val.Id-1], data.Relations.Index[val.Id-1]})
 		}
 
 		t, err := (template.ParseFiles(FileNames...))
-		//necessaire de verifier l'erreur
 		if err != nil {
 			ErrorPage(err, w, http.StatusInternalServerError)
 			return
@@ -60,14 +65,6 @@ func HandlePage(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		showErrorScript := `
-			<script>
-				document.addEventListener("DOMContentLoaded", function() {
-					document.getElementById("error-message").style.display = "block";
-				});
-			</script>
-		`
-		fmt.Fprint(w, showErrorScript)
 		elapsed := time.Since(tStart)
 		log.Printf("Parsing took %.4fs\n", elapsed.Seconds())
 	}

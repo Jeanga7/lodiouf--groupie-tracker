@@ -32,7 +32,7 @@
             <h2 id="artists-list-title">Artists</h2>
             <div id="artists-list">
                 {{ range .FinalArtists }}
-                <div class="artist-card">
+                <div class="artist-card" id="card_{{.Id}}">
                     <div class="artist-top-box">
                         <img src="{{ .Image }}" alt="{{ .Name }}" class="artist-image">
                         <span class="artist-name">{{ .Name }}</span>
@@ -57,7 +57,7 @@
                             </ul>
                         </span>
                         <!-- Hidden values end -->
-                        <span class="voir-zone">
+                        <span class="voir-zone" id="see_{{.Id}}">
                             <span class="voir-button">VOIR</span>
                             <span class="green-arrow">
                                 <svg version="1.1" id="Arrow" xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
                 {{ end }}
             </div>
         </div>
-        {{template "footer" .}}
+        {{template "footer"}}
     </div>
     <div id="modal">
         <div id="modal-content">
@@ -98,17 +98,9 @@
             <span id="modal-close">&times;</span>
         </div>
     </div>
-    <!-- search part -->
-    <div id="search-overlay"></div>
-    <div id="search-results">
-        <input type="text" id="input-search">
-        <div id="search-block-container">
-            <div id="search-body">
-                <img src="" id="search-image">
-                <div id="search-info"></div>
-            </div>
-        </div>
-    </div>
+    {{template "search_part" .}}
+    
+
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/header.js"></script>
     <script src="/assets/js/search.js"></script>
