@@ -1,0 +1,33 @@
+{{define "search"}}
+<!-- search part -->
+<div id="search-overlay"></div>
+<div id="search-results">
+    <form>
+        <div id="search-zone">
+            <input type="text" id="input-search" name="search" placeholder="Rechercher...">
+            <div id="close-search"><span>&times;</span></div>
+        </div>
+    </form>
+    <div id="search-block-container">
+        <span id="no-matches">No matches.</span>
+        {{ range .FinalArtists}}
+        <div class="search-body" id="res_{{.Id}}">
+            <div style="background-image:url('{{ .Image }}');background-size:cover;background-position: center center;" class="search-image"></div>
+            <div class="search-info">
+                <p>
+                    <b>{{ .Name }} ({{ .CreationDate }}): </b> {{index .Members 0}}, 
+                    <b>First Album: </b>{{ .FirstAlbum }}, 
+                    <b>Upcoming Concerts: </b> 
+                    {{ range $locations, $dates := .Relations.DatesLocations  }}
+                        {{$locations}}: 
+                        {{ range $i, $date := $dates}}
+                            {{ $date}}, 
+                        {{ end }}
+                    {{ end }}
+                </p>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{end}}

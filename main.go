@@ -5,11 +5,9 @@ import (
 	"gt/gt"
 	"log"
 	"net/http"
-	"time"
 )
 
 func main() {
-	tStart := time.Now()
 	port := ":8080"
 	http.HandleFunc("/", gt.HandlePage)
 
@@ -20,8 +18,6 @@ func main() {
 	fmt.Println("Server Online...")
 	fmt.Println("Access to the app using this link : http://localhost" + port)
 
-	elapsed := time.Since(tStart)
-	log.Printf("Parsing took %.8fs\n", elapsed.Seconds())
 	if err := http.ListenAndServe(port, nil); err != nil {
 		log.Fatal(err)
 	}
